@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,53 +6,20 @@ public class Player1M : MonoBehaviour
 {
 
     public float speed1 = 4f;
-    [SerializeField]
-    private bool _wPressed, _sPressed, _aPressed, _dPressed;
+    public int health1 = 10;
+   
    
 
     // Update is called once per frame
     void Update()
     {
-        UserInput();
+       
         Move();
         Rotation();
+        RespawnP1();
     }
 
-    public virtual void UserInput()
-    {
-        if (Input.GetKey(KeyCode.W))
-        {
-            _wPressed = true;
-        }
-        else
-        {
-            _wPressed = false;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            _sPressed = true;
-        }
-        else
-        {
-            _sPressed = false;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            _aPressed = true;
-        }
-        else
-        {
-            _aPressed = false;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            _dPressed = true;
-        }
-        else
-        {
-            _dPressed = false;
-        }
-    }
+    
 
     public virtual void Move()
     {
@@ -81,6 +48,23 @@ public class Player1M : MonoBehaviour
           transform.Rotate(0f,0f,90f);  
         }
        
+    }
+
+    public void RespawnP1()
+    {
+        if (health1 == 0)
+        {
+            transform.position = new Vector3(-8.11f, 0.1f, -3.3759f);
+            health1 += 10;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Bullet2")
+        {
+            health1 -= 5;
+            Debug.Log("HitPlayer1");
+        }
     }
 
 }

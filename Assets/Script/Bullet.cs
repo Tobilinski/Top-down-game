@@ -17,7 +17,6 @@ public class Bullet : MonoBehaviour
     {
         if(other.gameObject.tag == "Player2")
         {
-            Destroy(other.gameObject);
             Destroy(gameObject);
         }
         if (other.gameObject.tag == "Wall")

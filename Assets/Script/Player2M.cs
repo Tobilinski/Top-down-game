@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Player2M :Player1M
 {
-    [SerializeField]
-    private bool _upPressed, _downPressed, _leftPressed, _rightPressed; 
+    public int health2 = 10;
+    
     public float speed2 = 4f;
     private void Awake()
     {
@@ -14,46 +14,11 @@ public class Player2M :Player1M
     // Update is called once per frame
     void Update()
     {
-        UserInput();
+        RespawnP2();
         Rotation();
         Move();
     }
-    public override void UserInput()
-    {
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            _upPressed = true;
-            
-        }
-        else
-        {
-            _upPressed = false;
-        }
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-           _downPressed = true;
-        }
-        else
-        {
-            _downPressed = false;
-        }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            _leftPressed = true;
-        }
-        else
-        {
-            _leftPressed = false;
-        }
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            _rightPressed = true;
-        }
-        else
-        {
-            _rightPressed = false;
-        }
-    }
+    
 
     public override void Move()
     {
@@ -82,6 +47,23 @@ public class Player2M :Player1M
             transform.Rotate(0f, 0f, 90f);
         }
 
+    }
+    public void RespawnP2()
+    {
+        if (health2 == 0)
+        {
+            transform.position = new Vector3(7.49f, 0.1f, -1.76184f);
+            health2 += 10;
+           
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.gameObject.tag == "Bullet1")
+        {
+            health2 -= 5;
+            Debug.Log("HitPlayer2");
+        }
     }
 
 
