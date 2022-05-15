@@ -6,7 +6,12 @@ public class Player1M : MonoBehaviour
 {
 
     public float speed1 = 4f;
+
     public int health1 = 10;
+
+    public int KillsP1 = 0;
+    public int KillsP2 = 0;
+    
    
    
 
