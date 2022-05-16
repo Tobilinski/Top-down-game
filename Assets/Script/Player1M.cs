@@ -1,19 +1,32 @@
  using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class Player1M : MonoBehaviour
 {
+    public GameObject P2;
+    private Player2M p2script;
+    public Text P1Score;
+    public Text P2Score;
 
     public float speed1 = 4f;
 
-    public int health1 = 10;
+    private int health1 = 10;
+    private int healthp2;
+    
+    
 
     public int KillsP1 = 0;
-    public int KillsP2 = 0;
-    
-   
-   
+    public int KillsP2;
+
+
+
+    private void Start()
+    {
+        p2script =P2.GetComponent<Player2M>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -22,6 +35,15 @@ public class Player1M : MonoBehaviour
         Move();
         Rotation();
         RespawnP1();
+        Killcounter1();
+        //getting health var from p2 script
+        healthp2 = p2script.health2;
+        KillsP2 = p2script.Killsplayer2;
+
+
+        P1Score.text = "Health: " + health1+ " Kills: " + KillsP1;
+        P2Score.text = "Health: " + healthp2 + " Kills: "+ KillsP2;
+        
     }
 
     
@@ -54,6 +76,13 @@ public class Player1M : MonoBehaviour
         }
        
     }
+    void Killcounter1()
+    {
+        if (health1 == 0)
+        {
+            KillsP1++;
+        }
+    }
 
     public void RespawnP1()
     {
@@ -69,6 +98,7 @@ public class Player1M : MonoBehaviour
         {
             health1 -= 5;
             Debug.Log("HitPlayer1");
+            KillsP1++;
         }
     }
 

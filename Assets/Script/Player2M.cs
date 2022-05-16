@@ -7,6 +7,7 @@ public class Player2M :Player1M
     public int health2 = 10;
     
     public float speed2 = 4f;
+    public int Killsplayer2 = 0;
     private void Awake()
     {
         transform.Rotate(0f, 0f, 180f);
@@ -17,6 +18,7 @@ public class Player2M :Player1M
         RespawnP2();
         Rotation();
         Move();
+        Killcounter2();
     }
     
 
@@ -46,7 +48,7 @@ public class Player2M :Player1M
         {
             transform.Rotate(0f, 0f, 90f);
         }
-
+        
     }
     public void RespawnP2()
     {
@@ -57,12 +59,20 @@ public class Player2M :Player1M
            
         }
     }
+    void Killcounter2()
+    {
+        if(health2 == 0)
+        {
+            Killsplayer2++;
+        }
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.tag == "Bullet1")
         {
             health2 -= 5;
             Debug.Log("HitPlayer2");
+            
         }
     }
 
