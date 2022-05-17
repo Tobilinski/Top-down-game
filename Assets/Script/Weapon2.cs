@@ -11,7 +11,7 @@ public class Weapon2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.RightShift))
+        if (Input.GetKeyDown(KeyCode.RightControl))
         {
             Shoot();
         }

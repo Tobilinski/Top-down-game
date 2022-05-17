@@ -8,6 +8,9 @@ public class Player2M :Player1M
     
     public float speed2 = 4f;
     public int Killsplayer2 = 0;
+
+    /*float MoveX;
+    float MoveY;*/
     private void Awake()
     {
         transform.Rotate(0f, 0f, 180f);
@@ -18,7 +21,7 @@ public class Player2M :Player1M
         RespawnP2();
         Rotation();
         Move();
-        Killcounter2();
+        
     }
     
 
@@ -40,11 +43,18 @@ public class Player2M :Player1M
         {
             transform.Translate(Vector2.right * speed2 * Time.deltaTime, Space.World);
         }
+
+        //Controller movement
+       /* MoveX = Input.GetAxis("HorizontalPlayer2");
+        transform.position += new Vector3(MoveX, 0f, 0f) * speed2 * Time.deltaTime;
+        MoveY = Input.GetAxis("VerticalPlayer2");
+        transform.position += new Vector3(0f, MoveY, 0f) * speed2 * Time.deltaTime;*/
+
     }
 
     public override void Rotation()
     {
-        if (Input.GetKeyDown(KeyCode.RightControl))
+        if (Input.GetKeyDown(KeyCode.RightShift))
         {
             transform.Rotate(0f, 0f, 90f);
         }
@@ -56,16 +66,11 @@ public class Player2M :Player1M
         {
             transform.position = new Vector3(7.49f, 0.1f, -1.76184f);
             health2 += 10;
-           
-        }
-    }
-    void Killcounter2()
-    {
-        if(health2 == 0)
-        {
             Killsplayer2++;
+
         }
     }
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.tag == "Bullet1")

@@ -21,11 +21,17 @@ public class Player1M : MonoBehaviour
     public int KillsP1 = 0;
     public int KillsP2;
 
+    
+
+    /*float MoveX;
+    float MoveY;*/
+
 
 
     private void Start()
     {
         p2script =P2.GetComponent<Player2M>();
+       
     }
 
     // Update is called once per frame
@@ -35,14 +41,14 @@ public class Player1M : MonoBehaviour
         Move();
         Rotation();
         RespawnP1();
-        Killcounter1();
+       
         //getting health var from p2 script
         healthp2 = p2script.health2;
         KillsP2 = p2script.Killsplayer2;
 
 
-        P1Score.text = "Health: " + health1+ " Kills: " + KillsP1;
-        P2Score.text = "Health: " + healthp2 + " Kills: "+ KillsP2;
+        P1Score.text = "Health: " + health1+ " Kills: " + KillsP2;
+        P2Score.text = "Health: " + healthp2 + " Kills: "+ KillsP1;
         
     }
 
@@ -66,29 +72,33 @@ public class Player1M : MonoBehaviour
         {
             transform.Translate(Vector2.right * speed1 * Time.deltaTime, Space.World);
         }
+
+        //Controller movement
+       /* MoveX = Input.GetAxis("Horizontal");
+        transform.position += new Vector3(MoveX, 0f, 0f) * speed1 * Time.deltaTime;
+        MoveY = Input.GetAxis("Vertical");
+        transform.position += new Vector3(0f, MoveY, 0f) * speed1 * Time.deltaTime;*/
+        
+
+
     }
 
     public virtual void Rotation()
     {
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.R))
         {
           transform.Rotate(0f,0f,90f);  
         }
        
     }
-    void Killcounter1()
-    {
-        if (health1 == 0)
-        {
-            KillsP1++;
-        }
-    }
+   
 
     public void RespawnP1()
     {
         if (health1 == 0)
         {
             transform.position = new Vector3(-8.11f, 0.1f, -3.3759f);
+            KillsP1++;
             health1 += 10;
         }
     }
@@ -98,7 +108,7 @@ public class Player1M : MonoBehaviour
         {
             health1 -= 5;
             Debug.Log("HitPlayer1");
-            KillsP1++;
+           
         }
     }
 
