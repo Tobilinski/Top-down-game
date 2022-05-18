@@ -79,6 +79,11 @@ public class Player2M :Player1M
             Debug.Log("HitPlayer2");
             
         }
+        if (other.gameObject.tag == "Health")
+        {
+            health2 += 5;
+            Destroy(other.gameObject);
+        }
     }
 
 

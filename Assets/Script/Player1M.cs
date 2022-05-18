@@ -8,6 +8,7 @@ public class Player1M : MonoBehaviour
 {
     public GameObject P2;
     private Player2M p2script;
+   
     public Text P1Score;
     public Text P2Score;
 
@@ -15,6 +16,8 @@ public class Player1M : MonoBehaviour
 
     private int health1 = 10;
     private int healthp2;
+
+    
     
     
 
@@ -31,6 +34,7 @@ public class Player1M : MonoBehaviour
     private void Start()
     {
         p2script =P2.GetComponent<Player2M>();
+       
        
     }
 
@@ -49,6 +53,17 @@ public class Player1M : MonoBehaviour
 
         P1Score.text = "Health: " + health1+ " Kills: " + KillsP2;
         P2Score.text = "Health: " + healthp2 + " Kills: "+ KillsP1;
+        if(KillsP1 == 30)
+        {
+            Application.Quit();
+            print("Quit");
+        }
+        if(KillsP2 == 30)
+        {
+            Application.Quit();
+            print("Quit");
+        }
+
         
     }
 
@@ -74,13 +89,10 @@ public class Player1M : MonoBehaviour
         }
 
         //Controller movement
-       /* MoveX = Input.GetAxis("Horizontal");
+        /*MoveX = Input.GetAxis("Horizontal");
         transform.position += new Vector3(MoveX, 0f, 0f) * speed1 * Time.deltaTime;
         MoveY = Input.GetAxis("Vertical");
         transform.position += new Vector3(0f, MoveY, 0f) * speed1 * Time.deltaTime;*/
-        
-
-
     }
 
     public virtual void Rotation()
@@ -89,7 +101,6 @@ public class Player1M : MonoBehaviour
         {
           transform.Rotate(0f,0f,90f);  
         }
-       
     }
    
 
@@ -110,6 +121,13 @@ public class Player1M : MonoBehaviour
             Debug.Log("HitPlayer1");
            
         }
+        if(other.gameObject.tag == "Health")
+        {
+            health1 += 5;
+            Destroy(other.gameObject);
+        }
     }
+
+    
 
 }
